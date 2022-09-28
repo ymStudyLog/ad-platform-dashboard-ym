@@ -26,11 +26,7 @@ const DefaultLayout = () => {
     <Box sx={{ display: 'flex', maxWidth:"100%" }}>
       <CssBaseline />
       {isMobile ? null : <Sidebar />}
-
-      {/* 헤더 */}
       <Header isMobile={isMobile} isOpenMobileMenu={isOpenMobileMenu} handleClick={handleClick} />
-
-      {/* 모바일 메뉴 */}
       {isMobile && isOpenMobileMenu ? (
         <Container
           sx={{
@@ -74,7 +70,6 @@ const DefaultLayout = () => {
         </Container>
       ) : null}
 
-      {/* 페이지 오는 자리 */}
       <Outlet />
     </Box>
   );

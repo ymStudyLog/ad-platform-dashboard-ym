@@ -1,6 +1,6 @@
 import React from "react";
 import { totalAdStatusState, adListState } from "../store/atom";
-import { TotalAdStatusType, AdListDataType } from "../models/types";
+import { TotalAdStatusType, AdListDataType } from "../types";
 import { useRecoilValue } from "recoil";
 import { addDays, format } from "date-fns";
 import { getTotalAdStatusData, dataService } from "../api/api";

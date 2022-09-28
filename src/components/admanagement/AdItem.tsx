@@ -16,7 +16,7 @@ import {
   TableRow,
 } from "@mui/material";
 import { useAdListModel } from "../../models/useAdListModel";
-import { AdListDataType } from "../../models/types";
+import { AdListDataType } from "../../types";
 
 type AdItemProps = {
   aditem: AdListDataType;

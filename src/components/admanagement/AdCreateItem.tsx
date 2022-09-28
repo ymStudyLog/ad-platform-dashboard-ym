@@ -18,7 +18,7 @@ import {
 } from "@mui/material";
 import { Box } from "@mui/system";
 import { useAdListModel } from "../../models/useAdListModel";
-import { AdListDataType } from "../../models/types";
+import { AdListDataType } from "../../types";
 
 const style = {
   position: "absolute" as "absolute",

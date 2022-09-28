@@ -2,7 +2,7 @@ import React from "react";
 import { Box, Toolbar, Container } from "@mui/material";
 import AdList from "../components/admanagement/AdList";
 import AdCreateItem from "../components/admanagement/AdCreateItem";
-import { AdListDataType } from "../models/types";
+import { AdListDataType } from "../types";
 import { useRecoilState } from "recoil";
 import { adListState } from "../store/atom";
 import Dropdown from "../layouts/Dropdown";

@@ -3,7 +3,7 @@ import AdItem from "./AdItem";
 import styled from "@emotion/styled";
 import { useRecoilState } from "recoil";
 import { adListState } from "../../store/atom";
-import { AdListDataType } from "../../models/types";
+import { AdListDataType } from "../../types";
 import { useAdListModel } from "../../models/useAdListModel";
 
 export interface IProps {

@@ -1,4 +1,4 @@
-import { AdListDataType } from "./types";
+import { AdListDataType } from "../types";
 import { dataService } from "../api/api";
 
 export const useAdListModel = () => {

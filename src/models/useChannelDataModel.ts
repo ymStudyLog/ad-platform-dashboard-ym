@@ -1,4 +1,4 @@
-import { ChannelStatusType } from './types';
+import { ChannelStatusType } from '../types';
 
 export interface IPlatformItem {
   channel: string;

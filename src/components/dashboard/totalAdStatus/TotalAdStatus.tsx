@@ -3,7 +3,7 @@ import { Box, Container, Typography, Grid } from "@mui/material";
 import { Item } from "../../../styles/Item";
 import { useRecoilState } from "recoil";
 import { totalAdStatusState } from "../../../store/atom";
-import { TotalAdStatusType } from "../../../models/types";
+import { TotalAdStatusType } from "../../../types";
 import {
   LineChart,
   Line,

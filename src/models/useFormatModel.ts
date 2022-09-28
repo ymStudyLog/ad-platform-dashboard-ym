@@ -1,4 +1,4 @@
-import { TotalAdStatusType } from "./types";
+import { TotalAdStatusType } from "../types";
 
 export enum CashUnits {
   thousand = 1000,
