@@ -15,7 +15,7 @@ import {
   TableContainer,
   TableRow,
 } from "@mui/material";
-import { useAdListModel } from "../../models/useAdListModel";
+import { useAdList } from "../../api/useAdList";
 import { AdListDataType } from "../../types";
 
 type AdItemProps = {
@@ -69,13 +69,13 @@ const AdItem = ({ aditem }: AdItemProps) => {
     });
   };
 
-  const { deleteAdList, putAdItemById } = useAdListModel();
+  const { deleteAdById, modifyAdById } = useAdList();
 
   const handleModifyClick = (
     params: number,
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
-    putAdItemById(params, {
+    modifyAdById(params, {
       id: params,
       adType: adType,
       title: title,
@@ -93,11 +93,11 @@ const AdItem = ({ aditem }: AdItemProps) => {
     params: number,
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
-    deleteAdList(params);
+    deleteAdById(params);
   };
   //put test
   // const test = () => {
-  //   putAdItemById(1, {
+  //   modifyAdById(1, {
   //     id: 1,
   //     adType: "web",
   //     title: "광고 7810",

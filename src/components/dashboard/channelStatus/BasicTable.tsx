@@ -1,7 +1,7 @@
 import React from 'react';
 // import { useRecoilState } from 'recoil';
 // import { channelState } from '../../../store/atom';
-// import { ChannelStatusType } from '../../../models/types';
+// import { ChannelAdDataType } from '../../../models/types';
 // import { dataService, getChannelStatusData } from '../../../api/api';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
 
@@ -16,7 +16,7 @@ const rows = [
 ];
 
 const BasicTable = () => {
-  // const [channelStatus, setChannelStatus] = useRecoilState<ChannelStatusType[]>(channelState);
+  // const [channelStatus, setChannelStatus] = useRecoilState<ChannelAdDataType[]>(channelState);
 
   // React.useEffect(() => {
   //   getChannelStatusData(dataService('channelStatus'), '')

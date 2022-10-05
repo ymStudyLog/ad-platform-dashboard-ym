@@ -1,4 +1,4 @@
-export type ChannelStatusType = {
+export type ChannelAdDataType = {
   channel: string;
   date: string;
   imp: number;
@@ -26,7 +26,7 @@ export type AdListDataType = {
 };
 
 
-export type TotalAdStatusType = {
+export type TotalAdDataType = {
   imp: number;
   click: number;
   cost: number;

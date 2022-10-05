@@ -1,40 +1,37 @@
-import { atom, selector } from "recoil";
-import {
-  dataService,
-  getTotalAdStatusData,
-  getChannelStatusData,
-} from "../api/api";
-import { v1 } from "uuid";
+import { selector } from "recoil";
+import { getData } from "../api/api";
+import { TotalAdDataType, ChannelAdDataType } from "../types";
 
-export const adListSelector = selector({
-  key: `uniqueKey/${v1()}`,
+export const earliestDate = selector({
+  key: "earliestDate",
   get: async () => {
-    const response = await dataService("adList").get("");
-    return response.data;
+    const totalAd = await getData<TotalAdDataType>(
+      "totalAdStatus",
+      "?_sort=date&_order=asc&_limit=1"
+    );
+    const channelAd = await getData<ChannelAdDataType>(
+      "channelStatus",
+      "?_sort=date&_order=asc&_limit=1"
+    );
+    if (totalAd.date <= channelAd.date) {
+      return Object.values(totalAd)[0];
+    } else return Object.values(channelAd)[0];
   },
 });
 
-export const adListState = atom({
-  key: `uniqueKey/${v1()}`,
-  default: adListSelector,
-});
-
-const channelStateSelector = selector({
-  key: `uniqueKey/${v1()}`,
-  get: () => getChannelStatusData(dataService("channelStatus"), ""),
-});
-
-export const channelState = atom({
-  key: `uniqueKey/${v1()}`,
-  default: channelStateSelector,
-});
-
-export const totalAdStatusSelector = selector({
-  key: `uniqueKey/${v1()}`,
-  get: () => getTotalAdStatusData(dataService("totalAdStatus"), ""),
-});
-
-export const totalAdStatusState = atom({
-  key: `uniqueKey/${v1()}`,
-  default: totalAdStatusSelector,
+export const latestDate = selector({
+  key: "latestDate",
+  get: async () => {
+    const totalAd = await getData<TotalAdDataType>(
+      "totalAdStatus",
+      "?_sort=date&_order=desc&_limit=1"
+    );
+    const channelAd = await getData<ChannelAdDataType>(
+      "channelStatus",
+      "?_sort=date&_order=desc&_limit=1"
+    );
+    if (totalAd.date >= channelAd.date) {
+      return Object.values(totalAd)[0];
+    } else return Object.values(channelAd)[0];
+  },
 });

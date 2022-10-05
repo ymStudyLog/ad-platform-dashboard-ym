@@ -2,25 +2,30 @@ import React from "react";
 import { Button, Box, Grow, Paper, Popper, MenuList } from "@mui/material";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 import { weekDropdown, statusDropdown } from "./DropdownItem";
-import useDropdownItem from "../models/useDropdownItem";
-import { RangeDateType } from "../models/useDropdownItem";
+import useDropdownItem from "../hooks/useDropdownItem";
+import { RangeDateType } from "../hooks/useDropdownItem";
 
-const dropdownHeight = "12rem";
+const DROPDOWN_HEIGHT = "12rem";
 
-export type DefaultProgressType = {
-  all: string;
-  active: string;
-  closed: string;
-};
+// type AdStatusType = {
+//   all: string;
+//   active: string;
+//   closed: string;
+// };
 
+//TODO 이 컴포넌트에서는 이제 전역 상태를 가져와서 일주일씩 나눠서 string[]이 되는 데이터를 만들어서 쭉 dropdown으로 보여주면됨
+//선택된 데이터는 localStorage에 저장하기 key 값은 "previous-week" JSON.stringify()
 const Dropdown = () => {
   const [open, setOpen] = React.useState<boolean>(false);
   const anchorRef = React.useRef<HTMLButtonElement>(null);
-  const checkTab = window.location.href.includes("/ad");
+  const isAdListPage = window.location.href.includes("/ad");
 
-  const { getRangeData, getProgressState } = useDropdownItem();
-  const rangeValue :RangeDateType[] = getRangeData();
-  const progressValue = getProgressState();
+  // const { getRangeData, getProgressState } = useDropdownItem();
+  // const rangeValue :RangeDateType[] = getRangeData();
+  // const progressItem = getProgressState();
+
+  const { dateRange, progressItem } = useDropdownItem();
+  // console.log(dateRange);
 
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
@@ -36,9 +41,9 @@ const Dropdown = () => {
 
   const getQuery = (e:any) => {
     //onClick 이벤트 핸들러 쿼리날리기
-    //range = const url = "?date_gte=2022-02-01&date_lte=2022-02-07";
-    //status = const url = "?status=active&status=closed";
-    console.log(e.target.key);
+    //range = const url = "?date_gte=2022-02-01&date_lte=2022-02-07"; //onClick -> query = "?date_gte=${week.start[0]}&date_lte=${week.end[0]}"
+    //status = const url = "?status=active&status=closed"; //onClick -> query = status[0] === "all" ? "?status=active&status=closed" : "?status=${status[0]}"
+    // console.log(e.target.key);
   }
 
   function handleListKeyDown(event: React.KeyboardEvent) {
@@ -64,7 +69,7 @@ const Dropdown = () => {
       style={{
         border: "1px solid #eeeeee",
         backgroundColor: "white",
-        width: dropdownHeight,
+        width: DROPDOWN_HEIGHT,
       }}
     >
       <Button
@@ -76,7 +81,8 @@ const Dropdown = () => {
         onClick={handleToggle}
         sx={{ width: "100%" }}
       >
-        {checkTab ? `전체 광고` : `${rangeValue[0].start[1]}~${rangeValue[0].end[1]}`}
+        {/* {isAdListPage ? `전체 광고` : `${rangeValue[0].start[1]}~${rangeValue[0].end[1]}`} */}
+        {isAdListPage ? `전체 광고` : `${dateRange[0]}~${dateRange[1]}`}
       </Button>
       <Popper
         open={open}
@@ -85,7 +91,7 @@ const Dropdown = () => {
         placement="bottom-start"
         transition
         disablePortal
-        sx={{ width: dropdownHeight, overflowY: "auto" }}
+        sx={{ width: DROPDOWN_HEIGHT, overflowY: "auto" }}
       >
         {({ TransitionProps, placement }) => (
           <Grow
@@ -104,11 +110,12 @@ const Dropdown = () => {
                   onKeyDown={handleListKeyDown}
                   sx={{ height: "120px" }}
                 >
-                  {checkTab
-                    ? Object.entries(progressValue).map(
-                        statusDropdown(handleClose, getQuery)
+                  {isAdListPage
+                    ? Object.entries(progressItem).map(
+                        statusDropdown(handleClose)
                       )
-                    : rangeValue.map(weekDropdown(handleClose, getQuery))}
+                    // : rangeValue.map(weekDropdown(handleClose, getQuery))}
+                    : dateRange.map(weekDropdown(handleClose))}
                 </MenuList>
               </ClickAwayListener>
             </Paper>

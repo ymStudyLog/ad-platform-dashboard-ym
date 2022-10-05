@@ -1,4 +1,4 @@
-import { TotalAdStatusType } from "../types";
+import { TotalAdDataType } from "../types";
 
 export enum CashUnits {
   thousand = 1000,
@@ -23,7 +23,7 @@ const essentialStatus: string[] = [
   "convValue",
 ];
 
-export const calculateSum = (totalAdStatus: TotalAdStatusType[], callback :any) : string[] => {
+export const calculateSum = (totalAdStatus: TotalAdDataType[], callback :any) : string[] => {
   const weeklySum : WeeklySumType[] = [];
   for (let i: number = 0; i < essentialStatus.length; i++) {
     let sum: number = 0;

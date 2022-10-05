@@ -1,26 +1,28 @@
 import MenuItem from "@mui/material/MenuItem";
-import { RangeDateType } from "../models/useDropdownItem";
+import { RangeDateType } from "../hooks/useDropdownItem";
 
-//onClick -> query = "?date_gte=${week.start[0]}&date_lte=${week.end[0]}" 
-export const weekDropdown = (handleClose: any, getQuery :any) => {
-  return (week: RangeDateType, index: number) => (
+export const weekDropdown = (handleClose: any) => {
+  return (week: string, index: number) => (
     <MenuItem
       sx={{ zIndex: 10, backgroundColor: "white" }}
-      onClick={(e)=>{handleClose(e); getQuery(e)}}
+      onClick={(e) => {
+        handleClose(e);
+      }}
       key={index}
     >
-      {week.start[1]} ~ {week.end[1]}
+      {/* {week.start[1]} ~ {week.end[1]} */}
+      {week[0]} ~ {week[1]}
     </MenuItem>
   );
 };
 
-
-//onClick -> query = status[0] === "all" ? "?status=active&status=closed" : "?status=${status[0]}"
-export const statusDropdown = (handleClose: any, getQuery :any) => {
-  return (status: [string,string], index: number) => (
+export const statusDropdown = (handleClose: any) => {
+  return (status: [string, string], index: number) => (
     <MenuItem
       sx={{ zIndex: 10, backgroundColor: "white" }}
-      onClick={(e)=>{handleClose(e); getQuery(e)}}
+      onClick={(e) => {
+        handleClose(e);
+      }}
       key={index}
     >
       {status[1]}
