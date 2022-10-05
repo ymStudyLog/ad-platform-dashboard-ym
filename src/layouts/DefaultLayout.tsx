@@ -14,57 +14,67 @@ import Header from "./Header";
 
 const DefaultLayout = () => {
   const isMobile: boolean = useMediaQuery("(max-width:480px)");
-  const [isOpenMobileMenu, setIsOpenMobileMenu] =
+  //TODO react-dom.development.js:798 Error: <rect> attribute width: A negative value is not valid. ("-23") 에러가 width 변경될떄마다 뜨는데 chart 문제인지 mui문제 인지 모르겠음
+  const [isMobileMenuOpen, setIsMobileMenuOpen] =
     React.useState<boolean>(false);
   const navigate = useNavigate();
 
-  const handleClick = (): void => {
-    setIsOpenMobileMenu(!isOpenMobileMenu);
+  const handleButtonClick = (): void => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
   return (
-    <Box sx={{ display: 'flex', maxWidth:"100%" }}>
+    <Box sx={{ display: "flex", maxWidth: "100%" }}>
       <CssBaseline />
       {isMobile ? null : <Sidebar />}
-      <Header isMobile={isMobile} isOpenMobileMenu={isOpenMobileMenu} handleClick={handleClick} />
-      {isMobile && isOpenMobileMenu ? (
+      <Header
+        isMobile={isMobile}
+        isMobileMenuOpen={isMobileMenuOpen}
+        handleButtonClick={handleButtonClick}
+      />
+      {isMobile && isMobileMenuOpen ? (
         <Container
           sx={{
-            position: 'absolute',
+            position: "absolute",
             top: `4rem`,
             left: 0,
-            width: '100%',
-            height: 'auto',
-            display: 'flex',
-            alignItems: 'center',
-            backgroundColor: 'white',
+            width: "100%",
+            height: "auto",
+            display: "flex",
+            alignItems: "center",
+            backgroundColor: "white",
             zIndex: 10,
           }}
         >
-
           <List sx={{ width: "100%" }}>
             <ListItem sx={{ display: "flex", flexDirection: "column" }}>
-                <Button
-                  sx={{
-                    border: '1px solid black',
-                    height: '3rem',
-                    width: '100%',
-                  }}
-                  onClick={()=>navigate("/")}
-                >
-                  대시보드
-                </Button>
-                <Button
-                  sx={{
-                    border: "1px solid black",
-                    height: "3rem",
-                    width: "100%",
-                    mt:"1rem"
-                  }}
-                  onClick={()=>navigate("/ad")}
-                >
-                  광고관리
-                </Button>
+              <Button
+                sx={{
+                  border: "1px solid black",
+                  height: "3rem",
+                  width: "100%",
+                }}
+                onClick={() => {
+                  handleButtonClick();
+                  navigate("/");
+                }}
+              >
+                대시보드
+              </Button>
+              <Button
+                sx={{
+                  border: "1px solid black",
+                  height: "3rem",
+                  width: "100%",
+                  mt: "1rem",
+                }}
+                onClick={() => {
+                  handleButtonClick();
+                  navigate("/ad");
+                }}
+              >
+                광고관리
+              </Button>
             </ListItem>
           </List>
         </Container>

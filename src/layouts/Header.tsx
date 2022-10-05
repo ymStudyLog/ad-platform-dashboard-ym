@@ -10,22 +10,21 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 
-interface HandleClickPropsType {
+interface HandleClickType {
   (event: React.MouseEvent<HTMLButtonElement>): void;
 }
 
 type HeaderPropsType = {
   isMobile: boolean;
-  isOpenMobileMenu: boolean;
-  handleClick: HandleClickPropsType;
+  isMobileMenuOpen: boolean;
+  handleButtonClick: HandleClickType;
 };
 
 const Header = (props: HeaderPropsType) => {
-  const { isMobile, isOpenMobileMenu, handleClick } = props;
+  const { isMobile, isMobileMenuOpen, handleButtonClick } = props;
 
   return (
     <AppBar sx={{ position: 'fixed' }}>
-      {/* 햄버거 or 닫기 */}
       {isMobile ? (
         <IconButton
           color='inherit'
@@ -38,13 +37,12 @@ const Header = (props: HeaderPropsType) => {
             zIndex: 20,
             color: '#59656b',
           }}
-          onClick={handleClick}
+          onClick={handleButtonClick}
         >
-          {isOpenMobileMenu ? <CloseIcon /> : <MenuIcon />}
+          {isMobileMenuOpen ? <CloseIcon /> : <MenuIcon />}
         </IconButton>
       ) : null}
 
-      {/* 아이콘 */}
       <Toolbar sx={{ backgroundColor: '#f5f5f5' }}>
         <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'flex-end' }}>
           <IconButton size='large' sx={{ color: '#59656b' }}>

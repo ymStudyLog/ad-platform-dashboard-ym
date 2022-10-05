@@ -1,37 +1,21 @@
-import axios, { AxiosInstance, AxiosResponse } from "axios";
-import {
-  TotalAdStatusType,
-  ChannelStatusType
-} from "../types";
+import axios, { AxiosResponse } from "axios";
 
 const BASE_URL = "http://localhost:8000";
-const ENDPOINT = {
+const DATABASE_URL = {
   adList: "/ad-list",
   channelStatus: "/channel-report",
   totalAdStatus: "/total-report",
 };
 
-type EndpointType = "adList" | "channelStatus" | "totalAdStatus";
+type DatabaseType = "adList" | "channelStatus" | "totalAdStatus";
 
-interface DataServiceType {
-  (endpoint: EndpointType): AxiosInstance;
-}
+export const dataService = (database : DatabaseType) =>
+  axios.create({ baseURL: `${BASE_URL}${DATABASE_URL[database]}` });
 
-export const dataService: DataServiceType = (endpoint) =>
-  axios.create({ baseURL: `${BASE_URL}${ENDPOINT[endpoint]}` }); //TODO "http://localhost:8000/total-report?date_gte=...&date_lte=..." 이런식으로 되어야됨. endpoint도 각각 다르고 get을 다시 만들어야될듯 
-
-export const getTotalAdStatusData = async <T = TotalAdStatusType[]>(
-  service: AxiosInstance,
-  url: string = ""
+export const getData = async <T>(
+  database: DatabaseType = "totalAdStatus",
+  endpoint: string = ""
 ): Promise<T> => {
-  const response: AxiosResponse<T> = await service.get(url);
-  return response.data;
-};
-
-export const getChannelStatusData = async <T = ChannelStatusType[]>(
-  service: AxiosInstance,
-  url: string = ""
-): Promise<T> => {
-  const response: AxiosResponse<T> = await service.get(url);
+  const response: AxiosResponse<T> = await dataService(database).get(endpoint);
   return response.data;
 };

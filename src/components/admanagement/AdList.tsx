@@ -1,24 +1,23 @@
 import React from "react";
 import AdItem from "./AdItem";
 import styled from "@emotion/styled";
-import { useRecoilState } from "recoil";
-import { adListState } from "../../store/atom";
 import { AdListDataType } from "../../types";
-import { useAdListModel } from "../../models/useAdListModel";
+import { useAdList } from "../../api/useAdList";
 
 export interface IProps {
   props: { id: number; budget: number };
 }
 
 const AdList = () => {
-  const [adList, setAdList] = useRecoilState<AdListDataType[]>(adListState);
-  const { getAdList } = useAdListModel();
-
-  // const query : string = "?status=active&status=closed";
-  // React.useEffect(() => { //(url : string = query)
-  //   getAdList().then((data)=>setAdList(data))
-  //   .catch(() => console.log("data dispatch error"));
-  // }, []);
+  // const [adList, setAdList] = useRecoilState<AdListDataType[]>(adListState);
+  const { getAdList } = useAdList();
+  const [adList, setAdList] = React.useState<AdListDataType[]>([]);
+  
+  const query : string = "?status=active&status=closed";
+  React.useEffect(() => { 
+    getAdList(query).then((data)=>setAdList(data))
+    .catch(() => console.log("data dispatch error"));
+  }, []);
   
   return (
     <AdListContainer>

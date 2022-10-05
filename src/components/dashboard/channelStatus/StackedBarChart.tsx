@@ -1,8 +1,4 @@
 import React from 'react';
-import { useRecoilState } from 'recoil';
-import { channelState } from '../../../store/atom';
-import { ChannelStatusType } from '../../../types';
-import { dataService, getChannelStatusData } from '../../../api/api';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 const data = [
@@ -44,7 +40,7 @@ const data = [
 ];
 
 const StackedBarChart = () => {
-  // const [channelStatus, setChannelStatus] = useRecoilState<ChannelStatusType[]>(channelState);
+  // const [channelStatus, setChannelStatus] = useRecoilState<ChannelAdDataType[]>(channelState);
 
   // React.useEffect(() => {
   //   getChannelStatusData(dataService('channelStatus'), '')

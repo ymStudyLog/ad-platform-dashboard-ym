@@ -3,11 +3,10 @@ import { Typography } from "@mui/material";
 import Modal from "@mui/material/Modal";
 import styled from "@emotion/styled";
 import Input from "@mui/material/Input";
-
 import {
   Button,
   Card as DefaultCard,
-  CardActions,
+  // CardActions,
   CardContent,
   CardHeader,
   Table,
@@ -17,7 +16,7 @@ import {
   TableRow,
 } from "@mui/material";
 import { Box } from "@mui/system";
-import { useAdListModel } from "../../models/useAdListModel";
+import { useAdList } from "../../api/useAdList";
 import { AdListDataType } from "../../types";
 
 const style = {
@@ -53,7 +52,7 @@ const AdCreateItem = ({ onSubmit, createId }: MyFormProps) => {
     convValue: 0,
     roas: 0,
   });
-  const { postAdItemById } = useAdListModel();
+  const { createAd } = useAdList();
   const {
     adType,
     title,
@@ -88,7 +87,7 @@ const AdCreateItem = ({ onSubmit, createId }: MyFormProps) => {
       convValue: 0,
       roas: 0,
     }); // 초기화
-    postAdItemById({
+    createAd({
       id: createId,
       adType: adType,
       title: title,
