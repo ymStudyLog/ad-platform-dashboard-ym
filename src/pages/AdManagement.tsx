@@ -3,19 +3,28 @@ import { Box, Toolbar, Container } from "@mui/material";
 import AdList from "../components/admanagement/AdList";
 import AdCreateItem from "../components/admanagement/AdCreateItem";
 import { AdListDataType } from "../types";
-import Dropdown from "../layouts/Dropdown";
+import Dropdown from "../components/Dropdown";
 
 function createStatusQuery(status: string) {
-  return status === "all" ? `?status=active&status=closed` : `status=${status}`;
+  return status === "all" ? `?status=active&status=closed` : `?status=${status}`;
 }
 
 const AdManagement = () => {
-  //로직 완성되면 adManagement로 옮겨가서 똑같이 만들기
-  //  const [statusQuery, setStatusQuery] = React.useState<string>("");
-  //const storedStatus = localStorage.getItem("previous-status");
+  const [statusQuery, setStatusQuery] = React.useState<string>("");
+  const [selectedStatus, setSelectedStatus] = React.useState<string[]>(["all"]);
+  const nextId = React.useRef(6);
 
-  //TODO 아이디 만들기 useRef() let createId = adList.length + 1;
-  const createId = 1000;
+  // localStorage.removeItem("previous-status");
+  React.useEffect(() => {
+    const storedStatus = localStorage.getItem("previous-status");
+    if (storedStatus !== null) {
+      const parsedStorage: string[] = JSON.parse(storedStatus);
+      setSelectedStatus(parsedStorage);
+      setStatusQuery(createStatusQuery(parsedStorage[0]));
+    } else {
+      setStatusQuery(createStatusQuery(selectedStatus[0]));
+    }
+  }, [selectedStatus]); //TODO 변경 예정
 
   return (
     <Box
@@ -37,8 +46,7 @@ const AdManagement = () => {
       >
         광고관리
       </Toolbar>
-      {/*TODO height 100vh-4rem 이 적절한지 확인하기 */}
-      <Box sx={{ pl: 3, pr: 3, height: "calc(100vh - 4rem)" }}>
+      <Box sx={{ pl: 3, pr: 3, height: "100vh" }}>
         <Container
           sx={{
             bgcolor: "white",
@@ -48,16 +56,20 @@ const AdManagement = () => {
           <Container
             sx={{ display: "flex", justifyContent: "space-between", p: 2 }}
           >
-            <Dropdown />
+            <Dropdown
+              selectedItem={selectedStatus}
+              setSelectedItem={setSelectedStatus}
+            />
             <AdCreateItem
-              createId={createId}
+              nextId={nextId.current}
               onSubmit={function (form: AdListDataType): void {
+                nextId.current += 1;
                 console.log(form);
               }}
             />
           </Container>
 
-          <AdList />
+          <AdList statusQuery={statusQuery}/>
         </Container>
       </Box>
     </Box>

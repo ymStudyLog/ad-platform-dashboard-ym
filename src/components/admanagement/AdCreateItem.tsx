@@ -6,7 +6,6 @@ import Input from "@mui/material/Input";
 import {
   Button,
   Card as DefaultCard,
-  // CardActions,
   CardContent,
   CardHeader,
   Table,
@@ -16,7 +15,7 @@ import {
   TableRow,
 } from "@mui/material";
 import { Box } from "@mui/system";
-import { useAdList } from "../../api/useAdList";
+import { useAdList } from "../../api/hooks/useAdList";
 import { AdListDataType } from "../../types";
 
 const style = {
@@ -26,17 +25,16 @@ const style = {
   transform: "translate(-50%, -50%)",
   width: 400,
   bgcolor: "background.paper",
-  //   border: "2px solid #000",
   boxShadow: 24,
   p: 4,
 };
 
 interface MyFormProps {
+  nextId: number;
   onSubmit: (form: AdListDataType) => void;
-  createId: number;
 }
 
-const AdCreateItem = ({ onSubmit, createId }: MyFormProps) => {
+const AdCreateItem = ({ onSubmit, nextId }: MyFormProps) => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -88,7 +86,7 @@ const AdCreateItem = ({ onSubmit, createId }: MyFormProps) => {
       roas: 0,
     }); // 초기화
     createAd({
-      id: createId,
+      id: nextId,
       adType: adType,
       title: title,
       budget: budget,
@@ -100,7 +98,7 @@ const AdCreateItem = ({ onSubmit, createId }: MyFormProps) => {
       roas: roas,
     });
   };
-  console.log(createId);
+
   return (
     <>
       <Button onClick={handleOpen} variant="contained">

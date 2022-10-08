@@ -11,7 +11,7 @@ import {
 import {
   calculateSum,
   calculateSumCallback,
-} from "../../../hooks/useFormatModel";
+} from "../../../utils/figureFormat";
 import { getData } from "../../../api/api";
 import LegendItem, { Item } from "./LegendItem";
 import { TotalAdDataType } from "../../../types";
@@ -38,7 +38,6 @@ const TotalAdStatus = (props : Props) => {
     [totalAdStatus]
   );
 
-  //TODO 차트 컴포넌트 따로 만들기
   return (
     <Box sx={{ p: 3 }}>
       <Typography sx={{ mb: 3, fontWeight: "bold" }}>통합 광고 현황</Typography>

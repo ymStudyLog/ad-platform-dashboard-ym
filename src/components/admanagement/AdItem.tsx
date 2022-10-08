@@ -15,7 +15,7 @@ import {
   TableContainer,
   TableRow,
 } from "@mui/material";
-import { useAdList } from "../../api/useAdList";
+import { useAdList } from "../../api/hooks/useAdList";
 import { AdListDataType } from "../../types";
 
 type AdItemProps = {

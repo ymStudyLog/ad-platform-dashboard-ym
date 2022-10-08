@@ -5131,9 +5131,9 @@
       "adType": "web",
       "title": "첫번째",
       "budget": 7773,
-      "status": "active",
+      "status": "closed",
       "startDate": "2022-07-20",
-      "endDate": null,
+      "endDate": "2022-09-30",
       "cost": 267144117,
       "convValue": 1157942685,
       "roas": 433
@@ -5160,7 +5160,31 @@
       "endDate": null,
       "cost": 267144117,
       "convValue": 1157942685,
-      "roas": "33333"
+      "roas": 455
+    },
+    {
+      "id": 4,
+      "adType": "web",
+      "title": "네번째",
+      "budget": "4000",
+      "status": "closed",
+      "startDate": "2022-07-23",
+      "endDate": "2022-10-07",
+      "cost": 263543339,
+      "convValue": 11579210593,
+      "roas": 566
+    },
+    {
+      "id": 5,
+      "adType": "web",
+      "title": "다섯번째",
+      "budget": "7000",
+      "status": "active",
+      "startDate": "2022-10-01",
+      "endDate": null,
+      "cost": 315424117,
+      "convValue": 20405432685,
+      "roas": 324
     }
   ]
 }
