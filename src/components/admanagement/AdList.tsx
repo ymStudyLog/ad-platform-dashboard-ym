@@ -2,22 +2,25 @@ import React from "react";
 import AdItem from "./AdItem";
 import styled from "@emotion/styled";
 import { AdListDataType } from "../../types";
-import { useAdList } from "../../api/useAdList";
+import { useAdList } from "../../api/hooks/useAdList";
 
 export interface IProps {
   props: { id: number; budget: number };
 }
 
-const AdList = () => {
-  // const [adList, setAdList] = useRecoilState<AdListDataType[]>(adListState);
+type Props = {
+  statusQuery : string;
+}
+
+const AdList = (props: Props) => {
+  const { statusQuery } = props;
   const { getAdList } = useAdList();
   const [adList, setAdList] = React.useState<AdListDataType[]>([]);
   
-  const query : string = "?status=active&status=closed";
   React.useEffect(() => { 
-    getAdList(query).then((data)=>setAdList(data))
+    getAdList(statusQuery).then((data)=>setAdList(data))
     .catch(() => console.log("data dispatch error"));
-  }, []);
+  }, [statusQuery]);
   
   return (
     <AdListContainer>

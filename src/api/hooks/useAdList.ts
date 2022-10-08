@@ -1,10 +1,10 @@
-import { AdListDataType } from "../types";
-import { dataService } from "./api";
+import { AdListDataType } from "../../types";
+import { dataService } from "../api";
 
 export const useAdList = () => {
   const adListService = dataService("adList");
 
-  const getAdList = async (url: string) => {
+  const getAdList = async (url: string) => { //TODO useMemo? 
     const response = await adListService.get(url); 
     return response.data;
   };
