@@ -14,41 +14,19 @@ const Dashboard = () => {
     "2022-02-01",
     "2022-02-07",
   ]);
-
-  // localStorage.removeItem("previous-week")
-  //TODO 로컬스토리지 get이 무한대로 계속 일어남 -> 로컬스토리지 값이 변하는 것을 useEffect가 감지할 수는 없음 
-  //로컬스토리지 가져오는 함수를 분리해야 됨
+  
   React.useEffect(() => {
-    const storedWeek = localStorage.getItem("previous-week"); 
+    const storedWeek = localStorage.getItem("previous-week");
     if (storedWeek !== null) {
       const parsedStorage: string[] = JSON.parse(storedWeek);
-      setSelectedRange(parsedStorage);
-      setDateQuery(createDateQuery(parsedStorage));
-    } else {
-      setDateQuery(createDateQuery(selectedRange));
+      setSelectedRange(parsedStorage); 
     }
-  }, [selectedRange]);
+  }, []);
 
-  /** 로컬스토리지 값 사용할때에는 useCallback으로 감싸서 하는듯?
-   * function useLocalStorage<T>(key: string, initialValue: T): [T, SetValue<T>] {
-  // Get from local storage then
-  // parse stored json or return initialValue
-  const readValue = useCallback((): T => {
-    // Prevent build error "window is undefined" but keep keep working
-    if (typeof window === 'undefined') {
-      return initialValue
-    }
+  React.useEffect(()=>{
+    setDateQuery(createDateQuery(selectedRange));
+  },[selectedRange]);
 
-    try {
-      const item = window.localStorage.getItem(key)
-      return item ? (parseJSON(item) as T) : initialValue
-    } catch (error) {
-      console.warn(`Error reading localStorage key “${key}”:`, error)
-      return initialValue
-    }
-  }, [initialValue, key])
-   */
-  
   return (
     <Box
       component="main"
