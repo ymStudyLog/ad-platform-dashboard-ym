@@ -14,17 +14,17 @@ const AdManagement = () => {
   const [selectedStatus, setSelectedStatus] = React.useState<string[]>(["all"]);
   const nextId = React.useRef(6);
 
-  // localStorage.removeItem("previous-status");
   React.useEffect(() => {
     const storedStatus = localStorage.getItem("previous-status");
     if (storedStatus !== null) {
       const parsedStorage: string[] = JSON.parse(storedStatus);
       setSelectedStatus(parsedStorage);
-      setStatusQuery(createStatusQuery(parsedStorage[0]));
-    } else {
-      setStatusQuery(createStatusQuery(selectedStatus[0]));
     }
-  }, [selectedStatus]); //TODO 변경 예정
+  }, []); 
+
+  React.useEffect(()=>{
+    setStatusQuery(createStatusQuery(selectedStatus[0]));
+  },[selectedStatus])
 
   return (
     <Box

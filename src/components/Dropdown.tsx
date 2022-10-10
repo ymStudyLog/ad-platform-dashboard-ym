@@ -28,15 +28,9 @@ const Dropdown = (props: Props) => {
     }
     setSelectedItem(JSON.parse(event.target.id));
     if (JSON.parse(event.target.id).length > 1) {
-      localStorage.setItem(
-        "previous-week",
-        JSON.stringify(JSON.parse(event.target.id))
-      );
+      localStorage.setItem("previous-week", event.target.id);
     } else {
-      localStorage.setItem(
-        "previous-status",
-        JSON.stringify(JSON.parse(event.target.id))
-      );
+      localStorage.setItem("previous-status", event.target.id);
     }
     setOpen(false);
   };

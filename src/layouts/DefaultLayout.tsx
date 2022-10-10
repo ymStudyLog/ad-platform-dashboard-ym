@@ -14,7 +14,6 @@ import Header from "./Header";
 
 const DefaultLayout = () => {
   const isMobile: boolean = useMediaQuery("(max-width:480px)");
-  //TODO react-dom.development.js:798 Error: <rect> attribute width: A negative value is not valid. ("-23") 에러가 width 변경될떄마다 뜨는데 chart 문제인지 mui문제 인지 모르겠음
   const [isMobileMenuOpen, setIsMobileMenuOpen] =
     React.useState<boolean>(false);
   const navigate = useNavigate();
@@ -22,7 +21,7 @@ const DefaultLayout = () => {
   const handleButtonClick = (): void => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
-
+  
   return (
     <Box sx={{ display: "flex", maxWidth: "100%" }}>
       <CssBaseline />
