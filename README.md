@@ -1,8 +1,10 @@
-# 목적
+# 팀 프로젝트 ad-platform-dashboard 수정
 
-팀 프로젝트 ad-platform-dashboard(https://github.com/Wanted-Pre-Onboarding-FE-Team5/ad-platform-dashboard) 를 수정하여 원래 의도에 맞는 완성된 애플리케이션으로 만들기
+### 원본
 
-# 설치 및 실행
+- organization repository : https://github.com/Wanted-Pre-Onboarding-FE-Team5/ad-platform-dashboard
+
+### 설치
 
 ```
 git clone https://github.com/ymStudyLog/ad-platform-dashboard-ym.git
@@ -16,7 +18,7 @@ npm run server
 
 ```
 
-# 수정 과정
+### 수정 과정
 
 우선 에러 해결을 가장 우선으로 하고, 나머지 구현되지 못한 부분과 테스트를 통해 발견된 오류들을 차례대로 수정할 예정이다.
 
@@ -31,9 +33,11 @@ recoil을 사용할 때마다 자주 목격했던 에러 메세지 발생. 원�
 > ★☆ 자세한 트러블 슈팅 과정 => https://velog.io/@zldzhd9292/trouble-shooting-1 <br />
 > ★☆ 스터디 내용 => https://velog.io/@zldzhd9292/frontend-study-1
 
-
-# 진행 경과
+### 진행 경과
 
 - ~~1차 수정 목표는 완료~~
 - 2차 수정 목표는 아직 구현되지 않은 ChannelStatus 컴포넌트와 AdList에서 데이터 값이 잘못 들어가고 있는 부분 수정하기.
 - 3차 수정 목표는 기능이 완성된 후 리팩토링, 최적화 하기.
+
+:eyes: _Go back to github profile to check the other repositories_ :eyes:
+[![github-profile](https://img.shields.io/badge/Github-Profile-blue?style=flat&logo=Git&logoColor=F05032)](https://github.com/ymStudyLog?tab=repositories)
